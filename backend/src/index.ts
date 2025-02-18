@@ -1,19 +1,16 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import weatherRoutes from './routes/weatherRoutes';
 
 dotenv.config();
+
 const app = express();
 
-const port = 3000;
+const PORT = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {
-    res.send('Hello, TypeScript + Node.js + Express!');
+app.use(express.json());
+app.use('/api/weather', weatherRoutes);
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
-
-console.log('watch mode doing its thingggg');
-
-const weatherApiKey = process.env.WEATHER_API_KEY;
