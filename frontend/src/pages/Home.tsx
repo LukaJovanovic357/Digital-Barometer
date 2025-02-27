@@ -28,7 +28,6 @@ const Dashboard = () => {
                         return res.json();
                     })
                 );
-                console.log('responses:', responses);
                 setWeatherData(responses);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
