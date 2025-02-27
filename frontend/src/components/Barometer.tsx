@@ -7,15 +7,6 @@ interface BarometerProps {
     };
 }
 
-interface BarometerProps {
-    data: {
-        city: string;
-        pressure: number;
-        trend: 'rising' | 'falling';
-        status: 'stormy' | 'rain' | 'change' | 'fair' | 'very dry';
-    };
-}
-
 const pressureLables = [
     { value: 1060, position: 'top-1' },
     { value: 1030, position: 'right-2' },

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Barometer from '../components/Barometer';
 import LocationSelector from '../components/LocationSelector';
+import useFetchWeather from '../hooks/useFetchWeather';
 
 type WeatherData = {
     city: string;
@@ -13,29 +14,10 @@ const Dashboard = () => {
     const [location, setLocation] = useState<'Vilnius' | 'Nida' | 'Both'>(
         'Both'
     );
-    const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
+    const { weatherData, loading, error } = useFetchWeather(location);
 
-    useEffect(() => {
-        const fetchWeather = async () => {
-            try {
-                const cities =
-                    location === 'Both' ? ['Vilnius', 'Nida'] : [location];
-                const responses = await Promise.all(
-                    cities.map(async city => {
-                        const res = await fetch(
-                            `http://localhost:5000/api/weather?city=${city}`
-                        );
-                        return res.json();
-                    })
-                );
-                setWeatherData(responses);
-            } catch (error) {
-                console.error('Error fetching weather data:', error);
-            }
-        };
-
-        fetchWeather();
-    }, [location]);
+    if (loading) return <p>Loading...</p>;
+    if (error) console.log('error occured');
 
     return (
         <div className='flex flex-col items-center p-4 bg-[#f5ede4] min-h-screen'>
