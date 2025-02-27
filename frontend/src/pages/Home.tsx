@@ -1,11 +1,12 @@
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import Barometer from '../components/Barometer';
+import LocationSelector from '../components/LocationSelector';
 
 type WeatherData = {
     city: string;
     pressure: number;
     trend: 'rising' | 'falling';
-    condition: 'stormy' | 'rain' | 'change' | 'fair' | 'very dry';
+    status: 'stormy' | 'rain' | 'change' | 'fair' | 'very dry';
 };
 
 const Dashboard = () => {
@@ -27,6 +28,7 @@ const Dashboard = () => {
                         return res.json();
                     })
                 );
+                console.log('responses:', responses);
                 setWeatherData(responses);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
@@ -41,12 +43,12 @@ const Dashboard = () => {
             <h1 className='text-3xl font-bold text-[#6c3c1c] mb-4'>
                 Aneroid Barometer
             </h1>
-            {/* <LocationSelector location={location} setLocation={setLocation} />
+            <LocationSelector location={location} setLocation={setLocation} />
             <div className='flex gap-6 mt-6'>
                 {weatherData.map(data => (
                     <Barometer key={data.city} data={data} />
                 ))}
-            </div> */}
+            </div>
         </div>
     );
 };
