@@ -1,9 +1,9 @@
-interface LocationSelectorProps {
-    location: 'Vilnius' | 'Nida' | 'Both';
-    setLocation: (location: 'Vilnius' | 'Nida' | 'Both') => void;
-}
+import type { Location } from '../types';
 
-type Location = 'Vilnius' | 'Nida' | 'Both';
+interface LocationSelectorProps {
+    location: Location;
+    setLocation: (location: Location) => void;
+}
 
 const LocationSelector: React.FC<LocationSelectorProps> = ({
     location,

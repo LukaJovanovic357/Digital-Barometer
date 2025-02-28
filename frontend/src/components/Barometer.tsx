@@ -1,10 +1,8 @@
+import type { BarometerData } from '../types';
+import { calculateAngle } from '../utils/functions';
+
 interface BarometerProps {
-    data: {
-        city: string;
-        pressure: number;
-        trend: 'rising' | 'falling';
-        status: 'stormy' | 'rain' | 'change' | 'fair' | 'very dry';
-    };
+    data: BarometerData;
 }
 
 const pressureLables = [
@@ -15,15 +13,7 @@ const pressureLables = [
 ];
 
 const Barometer: React.FC<BarometerProps> = ({ data }) => {
-    const minPressure = 970;
-    const maxPressure = 1060;
-    const minAngle = -90;
-    const maxAngle = 90;
-
-    const angle =
-        ((data.pressure - minPressure) / (maxPressure - minPressure)) *
-            (maxAngle - minAngle) +
-        minAngle;
+    const angle = calculateAngle(data.pressure);
 
     return (
         <div className='bg-white rounded-xl shadow-lg p-6 min-w-96 flex flex-col items-center'>

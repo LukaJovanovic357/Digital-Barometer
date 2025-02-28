@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react';
-
-type WeatherData = {
-    city: string;
-    pressure: number;
-    trend: 'rising' | 'falling';
-    status: 'stormy' | 'rain' | 'change' | 'fair' | 'very dry';
-};
+import { BarometerData } from '../types';
 
 const useFetchWeather = (location: 'Vilnius' | 'Nida' | 'Both') => {
-    const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
+    const [weatherData, setWeatherData] = useState<BarometerData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
